@@ -17,7 +17,7 @@ dev:
 	concurrently --names "API,GRAPHQL,GATEWAY,UI" \
 		--prefix-colors "blue,magenta,green,yellow" \
 		--kill-others \
-		"cd $(API_DIR) && UIGRAPH_ADDR=:2181 air" \
-		"cd $(GRAPHQL_DIR) && PORT=2182 air" \
-		"cd $(GATEWAY_DIR) && PORT=2183 tsx watch src/index.ts" \
-		"cd $(UI_DIR) && PORT=2180 pnpm dev"
+		"cd $(UI_DIR) && PORT=$$UI_PORT pnpm dev"\
+		"cd $(API_DIR) && PORT=$$API_PORT air" \
+		"cd $(GRAPHQL_DIR) && PORT=$$GRAPHQL_PORT air" \
+		"cd $(GATEWAY_DIR) && PORT=$$GATEWAY_PORT tsx --watch src/index.ts" \

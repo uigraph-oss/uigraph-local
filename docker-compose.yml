@@ -5,11 +5,11 @@ services:
     image: postgres:16-alpine
     restart: unless-stopped
     environment:
-      POSTGRES_DB: uigraph
-      POSTGRES_USER: uigraph
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
-      - '2184:5432'
+      - '${POSTGRES_PORT}:5432'
     volumes:
       - postgres-local-data:/var/lib/postgresql/data
     healthcheck:
@@ -23,7 +23,7 @@ services:
     restart: unless-stopped
     command: redis-server --save 60 1 --appendonly yes
     ports:
-      - '2185:6379'
+      - '${REDIS_PORT}:6379'
     volumes:
       - redis-local-data:/data
     healthcheck:
@@ -37,7 +37,7 @@ services:
     restart: unless-stopped
     command: server /data
     ports:
-      - '2186:9000'
+      - '${MINIO_PORT}:9000'
     environment:
       MINIO_ROOT_USER: ${STORAGE_ACCESS_KEY}
       MINIO_ROOT_PASSWORD: ${STORAGE_SECRET_KEY}
@@ -54,6 +54,3 @@ volumes:
   redis-local-data:
   minio-local-data:
 
-networks:
-  default:
-    name: uigraph-local
