@@ -5,9 +5,6 @@ API_DIR     := ../uigraph-api
 GRAPHQL_DIR := ../uigraph-graphql
 GATEWAY_DIR := ../uigraph-gateway
 
--include .env
-export
-
 .PHONY: up dev down
 
 up:
@@ -17,11 +14,10 @@ down:
 	$(COMPOSE) down
 
 dev:
-	set -a && . ./.env && set +a && \
 	concurrently --names "API,GRAPHQL,GATEWAY,UI" \
 		--prefix-colors "blue,magenta,green,yellow" \
 		--kill-others \
-		"cd $(API_DIR) && air" \
-		"cd $(GRAPHQL_DIR) && PORT=8090 air" \
-		"cd $(GATEWAY_DIR) && PORT=8081 tsx watch src/index.ts" \
-		"cd $(UI_DIR) && PORT=3000 pnpm dev"
+		"cd $(API_DIR) && UIGRAPH_ADDR=:2181 air" \
+		"cd $(GRAPHQL_DIR) && PORT=2182 air" \
+		"cd $(GATEWAY_DIR) && PORT=2183 tsx watch src/index.ts" \
+		"cd $(UI_DIR) && PORT=2180 pnpm dev"
