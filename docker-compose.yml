@@ -9,7 +9,6 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
-      - '127.0.0.1:${POSTGRES_PORT}:5432'
       - '${INFRA_HOSTNAME}:${POSTGRES_PORT}:5432'
     volumes:
       - postgres-local-data:/var/lib/postgresql/data
@@ -24,7 +23,6 @@ services:
     restart: unless-stopped
     command: redis-server --save 60 1 --appendonly yes
     ports:
-      - '127.0.0.1:${REDIS_PORT}:6379'
       - '${INFRA_HOSTNAME}:${REDIS_PORT}:6379'
     volumes:
       - redis-local-data:/data
@@ -39,7 +37,6 @@ services:
     restart: unless-stopped
     command: server /data
     ports:
-      - '127.0.0.1:${MINIO_PORT}:9000'
       - '${INFRA_HOSTNAME}:${MINIO_PORT}:9000'
     environment:
       MINIO_ROOT_USER: ${STORAGE_ACCESS_KEY}
