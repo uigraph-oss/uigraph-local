@@ -54,3 +54,6 @@ volumes:
   redis-local-data:
   minio-local-data:
 
+networks:
+  default:
+    name: uigraph-local
