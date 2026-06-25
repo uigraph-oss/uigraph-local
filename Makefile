@@ -17,9 +17,10 @@ down:
 	$(COMPOSE) down
 
 dev:
+	set -a && . ./.env && set +a && \
 	concurrently --names "API,GRAPHQL,GATEWAY,UI" \
 		--prefix-colors "blue,magenta,green,yellow" \
-		--kill-others-on-fail \
+		--kill-others \
 		"cd $(API_DIR) && air" \
 		"cd $(GRAPHQL_DIR) && PORT=8090 air" \
 		"cd $(GATEWAY_DIR) && PORT=8081 tsx watch src/index.ts" \
