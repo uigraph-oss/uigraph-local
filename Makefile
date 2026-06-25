@@ -14,10 +14,10 @@ down:
 	$(COMPOSE) down
 
 dev:
-	concurrently --names "UI,API,GRAPHQL,GATEWAY" \
+	concurrently --names "API,GQL,GATEWAY,FRONTEND" \
 		--prefix-colors "blue,magenta,green,yellow" \
 		--kill-others-on-fail \
-		"cd $(UI_DIR) && PORT=$$UI_PORT pnpm dev"\
 		"cd $(API_DIR) && PORT=$$API_PORT air" \
 		"cd $(GRAPHQL_DIR) && PORT=$$GRAPHQL_PORT air" \
-		"cd $(GATEWAY_DIR) && PORT=$$GATEWAY_PORT tsx --watch src/index.ts" \
+		"cd $(GATEWAY_DIR) && PORT=$$GATEWAY_PORT pnpm dev" \
+		"cd $(UI_DIR) && PORT=$$UI_PORT pnpm dev"\
