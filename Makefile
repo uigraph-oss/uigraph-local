@@ -14,9 +14,9 @@ down:
 	$(COMPOSE) down
 
 dev:
-	concurrently --names "API,GRAPHQL,GATEWAY,UI" \
+	concurrently --names "UI,API,GRAPHQL,GATEWAY" \
 		--prefix-colors "blue,magenta,green,yellow" \
-		--kill-others \
+		--kill-others-on-fail \
 		"cd $(UI_DIR) && PORT=$$UI_PORT pnpm dev"\
 		"cd $(API_DIR) && PORT=$$API_PORT air" \
 		"cd $(GRAPHQL_DIR) && PORT=$$GRAPHQL_PORT air" \
