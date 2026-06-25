@@ -1,9 +1,9 @@
 COMPOSE := docker compose -f docker-compose.yml
 
-UI_DIR      := ../uigraph-ui
-API_DIR     := ../uigraph-api
-GRAPHQL_DIR := ../uigraph-graphql
-GATEWAY_DIR := ../uigraph-gateway
+UI_DIR      := ${UIGRAPH_ROOT}/uigraph-ui
+API_DIR     := ${UIGRAPH_ROOT}/uigraph-api
+GRAPHQL_DIR := ${UIGRAPH_ROOT}/uigraph-graphql
+GATEWAY_DIR := ${UIGRAPH_ROOT}/uigraph-gateway
 
 .PHONY: up dev down
 
