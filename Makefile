@@ -15,7 +15,7 @@ down:
 	$(COMPOSE) down
 
 dev:
-	concurrently --names "API,GQL,GATEWAY,MCP,FRONTEND" \
+	concurrently --names "UI,API,MCP,GRAPHQL,GATEWAY" \
 		--prefix-colors "blue,magenta,green,cyan,yellow" \
 		--kill-others-on-fail \
 		"cd $(UI_DIR) && PORT=$$UI_PORT pnpm dev"\
